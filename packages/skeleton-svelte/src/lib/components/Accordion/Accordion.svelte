@@ -7,7 +7,7 @@
 
 	// Props
 	let {
-		value = $bindable([]),
+		value = [],
 		animDuration = 200,
 		// Root
 		base = '',
@@ -26,17 +26,13 @@
 	// Zag
 	const [snapshot, send] = useMachine(
 		accordion.machine({
-			id: useId(),
-			onValueChange(details) {
-				zagProps.onValueChange?.(details);
-				value = details.value;
-			}
+			id: useId()
 		}),
 		{
 			context: {
 				...zagProps,
 				get value() {
-					return $state.snapshot(value);
+					return value;
 				}
 			}
 		}
